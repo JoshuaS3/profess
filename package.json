@@ -1,0 +1,30 @@
+{
+  "name": "profess",
+  "version": "0.1.0",
+  "description": "A node.js server for MVC-like backend structures.",
+  "main": "/src/index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joshuas3/profess.git"
+  },
+  "keywords": [
+    "http",
+    "https",
+    "server",
+    "mvc",
+    "structure",
+    "backend"
+  ],
+  "author": "Joshua 'joshuas3' Stockin",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/joshuas3/profess/issues"
+  },
+  "homepage": "https://github.com/joshuas3/profess#readme",
+  "devDependencies": {
+    "mocha": "^6.0.2"
+  }
+}
