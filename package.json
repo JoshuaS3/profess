@@ -26,5 +26,8 @@
   "homepage": "https://github.com/joshuas3/profess#readme",
   "devDependencies": {
     "mocha": "^6.0.2"
+  },
+  "dependencies": {
+    "lognestmonster": "^0.2.2"
   }
 }
