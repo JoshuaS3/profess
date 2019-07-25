@@ -20,7 +20,7 @@
 # You should have received a copy of the GNU General Public License
 # along with Profess. If not, see <https://www.gnu.org/licenses/>.
 
-from types import *
+from .types import *
 
 class Model:
 	Name = None
@@ -28,15 +28,15 @@ class Model:
 	Queries = {}
 
 	def __init__(self, name, config):
-		types("str", name)
-		types("ModelConfig", config)
+		types(str, name)
+		types(ModelConfig, config)
 		self.Name = name
 		self.Config = config
 
 	def AddQuery(self, queryName, query):
-		types("str", queryName)
-		types("str", query)
+		types(str, queryName)
+		types(str, query)
 		self.Queries[queryName] = query
 
 	def Query(self, queryName):
-		types("str", queryName)
+		types(str, queryName)

@@ -20,7 +20,7 @@
 # You should have received a copy of the GNU General Public License
 # along with Profess. If not, see <https://www.gnu.org/licenses/>.
 
-from types import *
+from .types import *
 
 class View:
 	WebAddress = None
@@ -30,12 +30,12 @@ class View:
 	TemplateString = None
 	TemplateFile = None
 
-	def __init__(self, address, methods, mime):
-		types("str", address)
-		types("list", methods)
-		types("str", mime)
+	def __init__(self, address, methods=["GET"], mime="text/html"):
+		types(str, address)
+		types(list, methods)
+		types(str, mime)
 		self.WebAddress = address
 		for method in methods:
-			types("str", method)
+			types(str, method)
 		self.AcceptedMethods = methods
 		self.MimeType = mime

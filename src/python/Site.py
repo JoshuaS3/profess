@@ -98,21 +98,21 @@ class Site:
 
 
 	def GetController(self, name):
-		types("str", name)
+		types(str, name)
 		for controller in self.__controllers:
 			if controller.Name == name:
 				return controller
 		return None
 
 	def GetView(self, address):
-		types("str", address)
+		types(str, address)
 		for view in self.__views:
 			if view.WebAddress == address:
 				return view
 		return None
 
 	def GetModel(self, name):
-		types("str", name)
+		types(str, name)
 		for model in self.__models:
 			if model.Name == name:
 				return model

@@ -20,7 +20,7 @@
 # You should have received a copy of the GNU General Public License
 # along with Profess. If not, see <https://www.gnu.org/licenses/>.
 
-from types import *
+from .types import *
 
 def defaultHandler(request, response):
 	pass
@@ -37,11 +37,11 @@ class Controller:
 			controllerCount += 1
 			Name = "Controller" + str(controllerCount)
 		else:
-			types("str", name)
+			types(str, name)
 			self.Name = name
 
 		if handler == defaultHandler:
 			raise Exception("No handler passed to Controller constructor")
 		else:
-			types("function", handler)
+			types(function, handler)
 			self.Handler = handler
