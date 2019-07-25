@@ -1,2 +1,6 @@
 # Sublime Text files
 *.sublime*
+
+# Python cache files
+*__pycache__/
+*.pyc
