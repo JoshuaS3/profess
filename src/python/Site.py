@@ -40,7 +40,7 @@ class Site:
 		types(SiteConfig, __config)
 
 	def Stop():
-		if !__running:
+		if not __running:
 			return True
 		pass
 
