@@ -21,47 +21,66 @@
 # along with Profess. If not, see <https://www.gnu.org/licenses/>.
 
 from types import *
+from SiteConfig import *
 from Model import *
 from View import *
 from Controller import *
 
 class Site:
 	__config = None
+	__running = False
+	__server = None
+
+	def __init__(self, config):
+		types(SiteConfig, config)
+		self.__config = config
+		return self
 
 	def Start():
-		pass
+		types(SiteConfig, __config)
 
 	def Stop():
+		if !__running:
+			return True
 		pass
 
 
-	def AddController(controller):
+	def AddController(self, controller):
 		types(Controller, controller)
+		self.__controllers.append(controller)
+		return controller
 
-	def AddView(view):
+	def AddView(self, view):
 		types(View, view)
+		self.__views.append(view)
+		return view
 
-	def AddModel(model):
+	def AddModel(self, model):
 		types(Model, model)
+		self.__models.append(model)
+		return model
 
 
-	def GetController(name):
+	def GetController(self, name):
 		types("str", name)
-		for controller in __controllers:
+		for controller in self.__controllers:
 			if controller.Name == name:
 				return controller
+		return None
 
-	def GetView(address):
+	def GetView(self, address):
 		types("str", address)
-		for view in __views:
+		for view in self.__views:
 			if view.WebAddress == address:
 				return view
+		return None
 
-	def GetModel(name):
+	def GetModel(self, name):
 		types("str", name)
-		for model in __models:
+		for model in self.__models:
 			if model.Name == name:
 				return model
+		return None
 
 
 	__controllers = []

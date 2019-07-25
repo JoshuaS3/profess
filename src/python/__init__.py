@@ -21,6 +21,7 @@
 # along with Profess. If not, see <https://www.gnu.org/licenses/>.
 
 from .Site import *
+from .SiteConfig import *
 from .Model import *
 from .View import *
 from .Controller import *
