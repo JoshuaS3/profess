@@ -21,7 +21,6 @@
 # along with Profess. If not, see <https://www.gnu.org/licenses/>.
 
 def types(typeClass, variable):
-	typeOne = typeClass
-	typeTwo = str(type(variable)).split("<type '")[1].split("'>")[0]
-	if typeOne != typeTwo:
-		raise TypeError("Expected type " + typeOne + ", got " + typeTwo)
+	sameType = isinstance(variable, typeClass)
+	if not sameType:
+		raise TypeError("Expected type " + typeClass + ", got " + type(variable))
