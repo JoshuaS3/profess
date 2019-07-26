@@ -21,16 +21,15 @@
 # along with Profess. If not, see <https://www.gnu.org/licenses/>.
 
 from .types import *
+from .Template import *
 
-class View:
-	WebAddress = None
-	AcceptedMethods = None
-	MimeType = None
+class View (Template):
+	WebAddress = "/"
+	AcceptedMethods = ["GET"]
+	MimeType = "text/html"
 	ControllerID = None
-	TemplateString = ""
-	TemplateFile = None
 
-	def __init__(self, address, methods=["GET"], mime="text/html"):
+	def __init__(self, address="/", methods=["GET"], mime="text/html"):
 		types(str, address)
 		types(list, methods)
 		types(str, mime)

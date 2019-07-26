@@ -1,5 +1,5 @@
-# __init__.py
-# easy access for library classes
+# Template.py
+# interface for View, holds default information for responses
 
 # Profess Copyright (c) 2019 Joshua 'joshuas3' Stockin
 # <https://github.com/JoshuaS3/profess/>.
@@ -20,9 +20,8 @@
 # You should have received a copy of the GNU General Public License
 # along with Profess. If not, see <https://www.gnu.org/licenses/>.
 
-from .Site import *
-from .SiteConfig import *
-from .Model import *
-from .Template import *
-from .View import *
-from .Controller import *
+from .types import *
+
+class Template:
+	TemplateString = ""
+	TemplateFile = None

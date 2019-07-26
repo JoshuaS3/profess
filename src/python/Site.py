@@ -47,40 +47,40 @@ class Site:
 
 		class RequestHandler(BaseHTTPRequestHandler):
 			def _component_handler(self, view, request, response):
-
+				if response.Sent:
+					return
 
 				compiledContent = ""
 				controllerVars = {}
-				viewTree = [view]
-				#_baseView = view
-				#while _baseView is not None:
-				#	viewTree.insert(0, _baseView)
-				#	_baseView = _baseView.BaseView
-				for _view in viewTree:
-					_viewContent = ""
-					if _view.TemplateFile:
-						_f = open(_view.TemplateFile, "r")
-						_viewContent = _f.read()
-						_f.close()
-					else:
-						_viewContent = _view.TemplateString
+				if view.TemplateFile:
+					_f = open(view.TemplateFile, "r")
+					compiledContent = _f.read()
+					_f.close()
+				else:
+					compiledContent = view.TemplateString
 
-					if _view.ControllerID:
-						_controller = self.siteObj.GetController(_view.ControllerID)
-						if _controller:
-							_controllerVars = _controller.Handler(request, response)
-							if (response.Sent):
-								break
-							controllerVars.update(_controllerVars)
+				if view.ControllerID:
+					_controller = self.siteObj.GetController(view.ControllerID)
+					if _controller:
+						_controllerVars = _controller.Handler(request, response)
+						if (response.Sent):
+							return
+						controllerVars.update(_controllerVars)
 
+				for varName in controllerVars:
+					compiledContent = compiledContent.replace("@{" + varName + "}", str(controllerVars[varName]))
 
-					if compiledContent == "":
-						compiledContent = _viewContent
-					else:
-						compiledContent = compiledContent.replace("${!}", _viewContent)
-
-					for varName in controllerVars:
-						compiledContent = compiledContent.replace("@{" + varName + "}", str(controllerVars[varName]))
+				for templateName in self.siteObj._templates:
+					if "${" + templateName + "}" in compiledContent:
+						template = self.siteObj._templates[templateName]
+						templateContent = ""
+						if template.TemplateFile:
+							_f = open(template.TemplateFile, "r")
+							templateContent = _f.read()
+							_f.close()
+						else:
+							templateContent = template.TemplateString
+						compiledContent = compiledContent.replace("${" + templateName + "}", templateContent)
 
 				response.Mime = view.MimeType
 				response.Content = compiledContent
@@ -92,13 +92,11 @@ class Site:
 				responseInfo._isHEAD = (requestInfo.Method == "HEAD")
 				view = self.siteObj.GetView(requestInfo.Path)
 				if not view:
-					responseInfo.Code = 404
-					responseInfo.Content = "404 NOT FOUND"
+					self._component_handler(self.siteObj._config.NotFound, requestInfo, responseInfo)
 					responseInfo.Send()
 					return
 				if not requestInfo.Method in view.AcceptedMethods:
-					responseInfo.Code = 400
-					responseInfo.Content = "400 BAD REQUEST"
+					self._component_handler(self.siteObj._config.BadRequest, requestInfo, responseInfo)
 					responseInfo.Send()
 					return
 
@@ -106,8 +104,7 @@ class Site:
 				responseInfo.Send()
 				
 				if not responseInfo.Sent:
-					responseInfo.Code = 500
-					responseInfo.Content = "500 INTERNAL SERVER ERROR"
+					self._component_handler(self.siteObj._config.Error, requestInfo, responseInfo)
 					responseInfo.Send()
 
 
@@ -166,6 +163,11 @@ class Site:
 		types(Model, model)
 		self.__models.append(model)
 		return model
+	def AddTemplate(self, name, template):
+		types(str, name)
+		types(Template, template)
+		self._templates[name] = template
+		return template
 
 
 	def GetController(self, name):
@@ -174,14 +176,12 @@ class Site:
 			if controller.Name == name:
 				return controller
 		return None
-
 	def GetView(self, address):
 		types(str, address)
 		for view in self.__views:
 			if view.WebAddress == address:
 				return view
 		return None
-
 	def GetModel(self, name):
 		types(str, name)
 		for model in self.__models:
@@ -193,3 +193,4 @@ class Site:
 	__controllers = []
 	__views = []
 	__models = []
+	_templates = {}
