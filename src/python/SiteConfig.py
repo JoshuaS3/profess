@@ -28,3 +28,7 @@ class SiteConfig:
 	SSL_Enabled = False
 	SSL_Certificate = ""
 	SSL_Key = ""
+
+	NotFound = None
+	Forbidden = None
+	Error = None

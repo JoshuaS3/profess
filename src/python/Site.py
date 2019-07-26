@@ -25,48 +25,119 @@ from .SiteConfig import *
 from .Model import *
 from .View import *
 from .Controller import *
-from http.server import HTTPServer, BaseHTTPRequestHandler
-
-def request(requestType, siteObj, requestObj):
-	pass
+from .Request import *
+from .Response import *
+from http.server import ThreadingHTTPServer, BaseHTTPRequestHandler
 
 class Site:
-	__config = None
+	_config = None
 	__running = False
 	__server = None
 	__site = None
 
 	def __init__(self, config):
 		types(SiteConfig, config)
-		self.__config = config
+		self._config = config
 		self.__site = self
 
 	def Start(self):
-		types(SiteConfig, self.__config)
+		types(SiteConfig, self._config)
 		if self.__running:
 			raise Exception("Server is already running")
 
 		class RequestHandler(BaseHTTPRequestHandler):
-			def do_GET(self):
-				view = None
+			def _component_handler(self, view, request, response):
+
+
+				compiledContent = ""
+				controllerVars = {}
+				viewTree = [view]
+				#_baseView = view
+				#while _baseView is not None:
+				#	viewTree.insert(0, _baseView)
+				#	_baseView = _baseView.BaseView
+				for _view in viewTree:
+					_viewContent = ""
+					if _view.TemplateFile:
+						_f = open(_view.TemplateFile, "r")
+						_viewContent = _f.read()
+						_f.close()
+					else:
+						_viewContent = _view.TemplateString
+
+					if _view.ControllerID:
+						_controller = self.siteObj.GetController(_view.ControllerID)
+						if _controller:
+							_controllerVars = _controller.Handler(request, response)
+							if (response.Sent):
+								break
+							controllerVars.update(_controllerVars)
+
+
+					if compiledContent == "":
+						compiledContent = _viewContent
+					else:
+						compiledContent = compiledContent.replace("${!}", _viewContent)
+
+					for varName in controllerVars:
+						compiledContent = compiledContent.replace("@{" + varName + "}", str(controllerVars[varName]))
+
+				response.Mime = view.MimeType
+				response.Content = compiledContent
+
+
+			def _handle_request(self):
+				requestInfo = Request(self)
+				responseInfo = Response(self)
+				responseInfo._isHEAD = (requestInfo.Method == "HEAD")
+				view = self.siteObj.GetView(requestInfo.Path)
 				if not view:
-					self.send_response(404)
-					self.end_headers()
-					self.wfile.write(b'Error 404')
+					responseInfo.Code = 404
+					responseInfo.Content = "404 NOT FOUND"
+					responseInfo.Send()
+					return
+				if not requestInfo.Method in view.AcceptedMethods:
+					responseInfo.Code = 400
+					responseInfo.Content = "400 BAD REQUEST"
+					responseInfo.Send()
 					return
 
-				self.send_response(200)
-				self.end_headers()
-				print(self.command)
-				print(self.path)
-				self.wfile.write(b'<body><h1>hello world</h1></body>')
+				self._component_handler(view, requestInfo, responseInfo)
+				responseInfo.Send()
+				
+				if not responseInfo.Sent:
+					responseInfo.Code = 500
+					responseInfo.Content = "500 INTERNAL SERVER ERROR"
+					responseInfo.Send()
+
+
+			def do_GET(self):
+				self._handle_request()
+			def do_HEAD(self):
+				self._handle_request()
+			def do_POST(self):
+				self._handle_request()
+			def do_PUT(self):
+				self._handle_request()
+			def do_DELETE(self):
+				self._handle_request()
+			def do_CONNECT(self):
+				self._handle_request()
+			def do_OPTIONS(self):
+				self._handle_request()
+			def do_TRACE(self):
+				self._handle_request()
+			def do_PATCH(self):
+				self._handle_request()
+
 		RequestHandler.siteObj = self
 
-		self.__server = HTTPServer(('localhost', self.__config.Port), RequestHandler)
+		self.__server = ThreadingHTTPServer(('localhost', self._config.Port), RequestHandler)
 
-		if self.__config.SSL_Enabled:
+		if self._config.SSL_Enabled:
 			pass
 
+		self.__running = True
 		self.__server.serve_forever()
 
 	def Stop(self):

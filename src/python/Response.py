@@ -1,5 +1,5 @@
-# View.py
-# view component of the MVC model
+# Response.py
+# class that organizes outgoing response information
 
 # Profess Copyright (c) 2019 Joshua 'joshuas3' Stockin
 # <https://github.com/JoshuaS3/profess/>.
@@ -20,22 +20,29 @@
 # You should have received a copy of the GNU General Public License
 # along with Profess. If not, see <https://www.gnu.org/licenses/>.
 
-from .types import *
+class Response:
+	Sent = False
+	Code = 200
+	Mime = "text/plain"
+	Headers = {}
+	Content = "200 SUCCESS"
 
-class View:
-	WebAddress = None
-	AcceptedMethods = None
-	MimeType = None
-	ControllerID = None
-	TemplateString = ""
-	TemplateFile = None
+	_isHEAD = False
+	_handler = None
 
-	def __init__(self, address, methods=["GET"], mime="text/html"):
-		types(str, address)
-		types(list, methods)
-		types(str, mime)
-		self.WebAddress = address
-		for method in methods:
-			types(str, method)
-		self.AcceptedMethods = methods
-		self.MimeType = mime
+	def __init__(self, handler):
+		self._handler = handler
+
+	def Send(self):
+		if self.Sent:
+			raise Exception("Attempt to double send a response")
+		self._handler.send_response(self.Code)
+		self.Headers["Content-Length"] = len(self.Content)
+		self.Headers["Content-Type"] = self.Mime
+		for key in self.Headers:
+			value = self.Headers[key]
+			self._handler.send_header(key, value)
+		if not self._isHEAD:
+			self._handler.end_headers()
+			self._handler.wfile.write(self.Content.encode("ascii"))
+		self.Sent = True

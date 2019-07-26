@@ -43,5 +43,5 @@ class Controller:
 		if handler == defaultHandler:
 			raise Exception("No handler passed to Controller constructor")
 		else:
-			types(function, handler)
+			if not callable(handler): raise Exception("Expected type function for Controller handler")
 			self.Handler = handler
