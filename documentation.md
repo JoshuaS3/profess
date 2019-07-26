@@ -1,28 +1,39 @@
 # Basic (ideal) documentation
 ```
 Class Profess
-
-	-- Language independent implementation but will be the same API --
 	Class Request
-		...
+		string Request -- e.g. GET / HTTP/2.0
+		string ClientHost -- client IP address
+		string Path -- path to resource
+		string Method -- HTTP method used
+		<string, string> Headers -- dictionary of headers
+		<string, string> Cookies -- parsed Cookie header (if exists)
+		<string, string> Params -- URL parameters
+		string Body -- request body
 	Class Response
-		...
+		bool Sent
+		int Code
+		string Mime
+		<string, string> Headers -- response headers
+		string Content -- response body
 	Class QueryResult
 		...
 	Class SiteConfig
-		...
+		int Port
+		bool SSLEnabled
+		string SSLCertificate
+		string SSLKey
+		View NotFound
+		View Forbidden
+		View Error
 	Class ModelConfig
 		...
 		-- this is the bulk of the project, it will require different
 		-- SQL APIs for different languages to be packed with releases
-	------------------------------------------------------------------
-
-	Function Init(SiteConfig config) creates and returns new Site object
-
 
 	Class Controller
 		string Name
-		Function Handler(Request req, Response res) custom handler for request and response manipulation, interop with View, returns int StatusCode
+		<string, string> Handler(Request req, Response res) custom handler for request and response manipulation, interop with View, returns inline substitutes
 	Class View
 		string WebAddress -- acts as the identifier (Name) because you can't have more than 1 view at the same web address
 		string AcceptedMethods[]
@@ -34,24 +45,16 @@ Class Profess
 		string Name
 		ModelConfig Config -- info like DB type, host, username, password, etc.
 		<string, string> Queries{};
-		Function Query(string QueryName) executes Queries[QueryName] and returns new QueryResult object
+		QueryResult Query(string QueryName) executes Queries[QueryName] and returns new QueryResult object
 	Class Site
-		Function Start() returns startup status
-		Function Stop() returns exit status
+		void Start()
+		bool Stop()
 
-		Function AddController(Controller c) returns c
-		Function AddView(View v) returns v
-		Function AddModel(Model m) returns m
+		Controller AddController(Controller c) returns c
+		View AddView(View v) returns v
+		Model AddModel(Model m) returns m
 
-		Function GetController(string name) returns Controllers[name]
-		Function GetView(string name) returns Views[name]
-		Function GetModel(string name) returns Models[name]
-
-		Controller Controllers[]
-		View Views[]
-		Model Models[]
-
-
-
-SiteConfig will accept files that implement an nginx-like .conf format
+		Controller GetController(string name)
+		View GetView(string name)
+		Model GetModel(string name)
 ```
