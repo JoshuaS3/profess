@@ -26,7 +26,7 @@ from .Template import *
 class View (Template):
 	WebAddress = "/"
 	AcceptedMethods = ["GET"]
-	MimeType = "text/html"
+	MimeType = "text/plain"
 	ControllerID = None
 
 	def __init__(self, address="/", methods=["GET"], mime="text/html"):

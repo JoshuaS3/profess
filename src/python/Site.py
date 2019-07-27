@@ -20,6 +20,7 @@
 # You should have received a copy of the GNU General Public License
 # along with Profess. If not, see <https://www.gnu.org/licenses/>.
 
+import os
 from .types import *
 from .SiteConfig import *
 from .Model import *
@@ -27,6 +28,7 @@ from .View import *
 from .Controller import *
 from .Request import *
 from .Response import *
+from .MimeTypes import *
 from http.server import ThreadingHTTPServer, BaseHTTPRequestHandler
 
 class Site:
@@ -51,14 +53,29 @@ class Site:
 					return
 
 				compiledContent = ""
-				controllerVars = {}
+				isBinary = False
 				if view.TemplateFile:
-					_f = open(view.TemplateFile, "r")
-					compiledContent = _f.read()
-					_f.close()
+					for mimeType in MimeTypes:
+						if mimeType["mime"] == view.MimeType:
+							if mimeType["binary"]:
+								isBinary = True
+							break
+					if not isBinary:
+						_f = open(view.TemplateFile, "r")
+						compiledContent = _f.read()
+						_f.close()
+					else:
+						_f = open(view.TemplateFile, "rb")
+						compiledContent = _f.read()
+						_f.close()
+						response.Mime = view.MimeType
+						response.Content = compiledContent
+						return
 				else:
 					compiledContent = view.TemplateString
 
+
+				controllerVars = {}
 				if view.ControllerID:
 					_controller = self.siteObj.GetController(view.ControllerID)
 					if _controller:
@@ -66,9 +83,9 @@ class Site:
 						if (response.Sent):
 							return
 						controllerVars.update(_controllerVars)
-
 				for varName in controllerVars:
 					compiledContent = compiledContent.replace("@{" + varName + "}", str(controllerVars[varName]))
+
 
 				for templateName in self.siteObj._templates:
 					if "${" + templateName + "}" in compiledContent:
@@ -82,8 +99,10 @@ class Site:
 							templateContent = template.TemplateString
 						compiledContent = compiledContent.replace("${" + templateName + "}", templateContent)
 
+
 				response.Mime = view.MimeType
-				response.Content = compiledContent
+				response.Content = compiledContent.encode("utf-8")
+				return
 
 
 			def _handle_request(self):
@@ -92,11 +111,32 @@ class Site:
 				responseInfo._isHEAD = (requestInfo.Method == "HEAD")
 				view = self.siteObj.GetView(requestInfo.Path)
 				if not view:
+					if self.siteObj._config.StaticServing:
+						for serveAddress in self.siteObj._config.StaticFolders:
+							if requestInfo.Path.startswith(serveAddress):
+								localFolder = self.siteObj._config.StaticFolders[serveAddress]
+								_fixedpath = requestInfo.Path.replace(serveAddress, "", 1)
+								_fpath = os.path.join(localFolder, _fixedpath.lstrip("/"))
+								if (os.path.exists(_fpath) and os.path.isfile(_fpath)):
+									staticView = View(requestInfo.Path)
+									staticView.MimeType = "text/plain"
+									_fextension = os.path.splitext(_fpath)[1]
+									for mimeType in MimeTypes:
+										if mimeType["extension"] == _fextension:
+											staticView.MimeType = mimeType["mime"]
+											break
+									staticView.TemplateFile = _fpath
+									self.siteObj.AddView(staticView)
+									self._component_handler(staticView, requestInfo, responseInfo)
+									responseInfo.Send()
+									return
 					self._component_handler(self.siteObj._config.NotFound, requestInfo, responseInfo)
+					responseInfo.Code = 404
 					responseInfo.Send()
 					return
 				if not requestInfo.Method in view.AcceptedMethods:
 					self._component_handler(self.siteObj._config.BadRequest, requestInfo, responseInfo)
+					responseInfo.Code = 400
 					responseInfo.Send()
 					return
 
@@ -105,8 +145,10 @@ class Site:
 				
 				if not responseInfo.Sent:
 					self._component_handler(self.siteObj._config.Error, requestInfo, responseInfo)
+					responseInfo.Code = 500
 					responseInfo.Send()
 
+			protocol_version = "HTTP/1.1"
 
 			def do_GET(self):
 				self._handle_request()
@@ -131,7 +173,7 @@ class Site:
 
 		self.__server = ThreadingHTTPServer(('localhost', self._config.Port), RequestHandler)
 
-		if self._config.SSL_Enabled:
+		if self._config.SSLEnabled:
 			pass
 
 		self.__running = True

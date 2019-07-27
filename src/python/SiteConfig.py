@@ -26,60 +26,60 @@ from .View import *
 class SiteConfig:
 	Port = 80
 
-	SSL_Enabled = False
-	SSL_Certificate = ""
-	SSL_Key = ""
+	SSLEnabled = False
+	SSLCertificate = ""
+	SSLKey = ""
 
 	NotFound = None
 	BadRequest = None
 	Error = None
 
+	StaticServing = False
+	StaticFolders = {}
+
 	def __init__(self):
 		self.NotFound = View("/404")
-		self.NotFound.TemplateString = """
-<!doctype html>
+		self.NotFound.TemplateString = """<!doctype html>
 <html>
 	<head>
 		<title>Error 404</title>
+		<style>*{color:#333; font-family: Segoe UI, Helvetica Neue, sans-serif;}</style>
 	</head>
 	<body>
 		<center>
 			<h1>error 404</h1>
 			<h2>resource not found</h2>
-			<a href="/">home</a>
+			<a href="/">return home</a>
 		</center>
 	</body>
-</html>
-"""
+</html>"""
 		self.BadRequest = View("/400")
-		self.BadRequest.TemplateString = """
-<!doctype html>
+		self.BadRequest.TemplateString = """<!doctype html>
 <html>
 	<head>
 		<title>Error 400</title>
+		<style>*{color:#333; font-family: Segoe UI, Helvetica Neue, sans-serif;}</style>
 	</head>
 	<body>
 		<center>
 			<h1>error 400</h1>
 			<h2>bad request</h2>
-			<a href="/">home</a>
+			<a href="/">return home</a>
 		</center>
 	</body>
-</html>
-"""
+</html>"""
 		self.Error = View("/500")
-		self.Error.TemplateString = """
-<!doctype html>
+		self.Error.TemplateString = """<!doctype html>
 <html>
 	<head>
-		<title>Error 404</title>
+		<title>Error 500</title>
+		<style>*{color:#333; font-family: Segoe UI, Helvetica Neue, sans-serif;}</style>
 	</head>
 	<body>
 		<center>
 			<h1>error 500</h1>
 			<h2>internal server failure</h2>
-			<a href="/">home</a>
+			<a href="/">return home</a>
 		</center>
 	</body>
-</html>
-"""
+</html>"""

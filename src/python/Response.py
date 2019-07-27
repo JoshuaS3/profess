@@ -44,5 +44,5 @@ class Response:
 			self._handler.send_header(key, value)
 		if not self._isHEAD:
 			self._handler.end_headers()
-			self._handler.wfile.write(self.Content.encode("ascii"))
+			self._handler.wfile.write(self.Content)
 		self.Sent = True
