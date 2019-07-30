@@ -100,6 +100,7 @@ class Site:
 						compiledContent = compiledContent.replace("${" + templateName + "}", templateContent)
 
 
+				response._accepts += view.AcceptedMethods
 				response.Mime = view.MimeType
 				response.Content = compiledContent.encode("utf-8")
 				return
@@ -109,6 +110,10 @@ class Site:
 				requestInfo = Request(self)
 				responseInfo = Response(self)
 				responseInfo._isHEAD = (requestInfo.Method == "HEAD")
+				responseInfo._isOPTIONS = (requestInfo.Method == "OPTIONS")
+				method = requestInfo.Method
+				if responseInfo._isHEAD:
+					method = "GET"
 				view = self.siteObj.GetView(requestInfo.Path)
 				if not view:
 					if self.siteObj._config.StaticServing:
@@ -134,9 +139,9 @@ class Site:
 					responseInfo.Code = 404
 					responseInfo.Send()
 					return
-				if not requestInfo.Method in view.AcceptedMethods:
-					self._component_handler(self.siteObj._config.BadRequest, requestInfo, responseInfo)
-					responseInfo.Code = 400
+				if method != "OPTIONS" and (not method in view.AcceptedMethods):
+					self._component_handler(self.siteObj._config.MethodNotAllowed, requestInfo, responseInfo)
+					responseInfo.Code = 405
 					responseInfo.Send()
 					return
 
@@ -148,7 +153,8 @@ class Site:
 					responseInfo.Code = 500
 					responseInfo.Send()
 
-			protocol_version = "HTTP/1.1"
+			protocol_version = "HTTP/2.0"
+			server_version = "profess/0.1.0"
 
 			def do_GET(self):
 				self._handle_request()
@@ -174,7 +180,8 @@ class Site:
 		self.__server = ThreadingHTTPServer(('localhost', self._config.Port), RequestHandler)
 
 		if self._config.SSLEnabled:
-			pass
+			import ssl
+			ssl.wrap_socket(self.__server.socket, self._config.SSLKey, self._config.SSLCertificate)
 
 		self.__running = True
 		self.__server.serve_forever()

@@ -53,17 +53,17 @@ class SiteConfig:
 		</center>
 	</body>
 </html>"""
-		self.BadRequest = View("/400")
-		self.BadRequest.TemplateString = """<!doctype html>
+		self.MethodNotAllowed = View("/405")
+		self.MethodNotAllowed.TemplateString = """<!doctype html>
 <html>
 	<head>
-		<title>Error 400</title>
+		<title>Error 405</title>
 		<style>*{color:#333; font-family: Segoe UI, Helvetica Neue, sans-serif;}</style>
 	</head>
 	<body>
 		<center>
-			<h1>error 400</h1>
-			<h2>bad request</h2>
+			<h1>error 405</h1>
+			<h2>method not allowed</h2>
 			<a href="/">return home</a>
 		</center>
 	</body>
