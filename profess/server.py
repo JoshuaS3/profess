@@ -19,4 +19,19 @@
 
 from .sock import sock, max_conn
 from .semantics import *
-from .server import *
+
+class server:
+	def __init__(self):
+		self.sock = sock(("0.0.0.0", 8080))
+		self.sock.listen(max_conn)
+		while True:
+			connection, address = self.sock.accept()
+			status = get_status_reason(200)
+			content = "<html><body><h1>tesaaaaaat</h1></body></html>"
+			headers = [("content-length", len(content)), ("content-type", "text/html"), ("server", "profess/0.1.0")]
+
+			status_str = status_line(http20, status)
+			headers_str = format_headers(headers)
+			connection.sendall(full_response(status_str, headers_str, content).encode("utf-8"))
+			connection.close()
+			print("> " + status_str)

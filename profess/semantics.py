@@ -118,4 +118,7 @@ def format_headers(headers_list):
 	return header_string
 
 def status_line(ver_string, status):
-	return ver_string + " " + str(status[0]) + " " + str(status[1]) + newline
+	return ver_string + " " + str(status[0]) + " " + str(status[1])
+
+def full_response(status, headers, body=""):
+	return status + newline + headers + newline + newline + body
