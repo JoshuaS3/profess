@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Josh Stockin - Projects</title>
+		<style>
+			${STYLE}
+
+			div.holder {
+				margin: 0 auto;
+				padding: 40px;
+				max-width: 650px;
+			}
+			div.holder div.header p {
+				color: #454545;
+				display: inline-block;
+				font-weight: bolder;
+				font-size: 2.5em;
+				margin: 0;
+			}
+			.project {
+				padding: 10px 0;
+				line-height: 1.6;
+				font-size: 1.05em;
+			}
+			.project.title {
+				margin: 10px 0;
+				font-size: 2em;
+			}
+			.project.image {
+				width: auto;
+				max-width:100%;
+				max-height: 350px;
+				padding: 0;
+				margin-bottom: 10px;
+			}
+			.project.image.left {
+				margin-right: 20px;
+				float: left;
+			}
+			.project.image.right {
+				margin-left: 20px;
+				float: right;
+			}
+			.project.tags {
+				list-style: none;
+				padding: 0;
+				margin: 10px 0;
+				font-style: italic;
+			}
+			.project.tags::before {
+				content: "Technologies: ";
+				font-style: normal;
+			}
+			.project.tags li {
+				display: inline-block;
+			}
+			.project.tags li:not(:last-child)::after {
+				content: ",";
+			}
+			.project.description {
+				margin: 0;
+				margin-bottom: 20px;
+				padding: 0;
+			}
+			.project.source {
+				margin-right: 20px;
+			}
+			@media only screen and (max-width: 700px) {
+				.project.image {
+					width: 100%;
+					height: auto;
+					max-height: 100%;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<div class="holder">
+			<div class="header">
+				<a href="/" style="text-decoration: none"><p>Josh Stockin</p></a>
+				<p style="float: right;">Projects</p>
+			</div>
+			<ul class="horizontal" style="width: 100%">
+				<li><a href="/">Home</a></li>
+				<li><a href="/blog">Blog</a></li>
+				<li><a href="/contact">Contact</a></li>
+			</ul>
+			<hr>
+			<p>All source code found on <a target="_blank" href="https://www.github.com/JoshuaS3">GitHub</a>.</p>
+			<ul>
+				<li><a href="#remote-control-snow-plow">Remote Control Snow Plow</a></li>
+				<li><a href="#lognestmonster">LogNestMonster</a></li>
+				<li><a href="#instant-gameworks-engine">Instant Gameworks Engine</a></li>
+				<li><a href="#profess">Profess</a></li>
+			</ul>
+			<div id="remote-control-snow-plow" class="project">
+				<h2 class="project title">Remote Control Snow Plow</h2>
+				<ul class="project tags">
+					<li class="accent">Robotics</li>
+					<li>Arduino</li>
+					<li>C++</li>
+				</ul>
+				<img class="project image left" src="projects_files/imgz56p.png">
+				<p class="project description">Lorem ipsum dolor sit amet, 
+consectetur adipiscing elit. Morbi vitae varius leo. Sed sagittis 
+interdum massa vel malesuada. Vestibulum bibendum placerat nunc, at 
+convallis libero malesuada vitae. Mauris vel ex ligula. Sed erat magna, 
+vulputate sed porttitor sit amet, commodo accumsan risus. In sodales 
+rhoncus porttitor. Vivamus vel erat congue, convallis turpis et, 
+porttitor mi. Phasellus quis varius tortor. Nullam auctor justo eu nunc 
+tempus, nec venenatis diam dictum. Mauris a risus et eros placerat 
+tincidunt. Suspendisse eget nunc cursus, iaculis nisl faucibus, tempor 
+nunc. Nunc eu justo ornare, varius risus in, auctor leo. Aenean gravida 
+metus purus, sed euismod ante aliquet ut. Morbi eu arcu sem. Nulla eu 
+quam maximus, ultricies erat ut, tempor eros. Praesent id ante vitae 
+tellus auctor hendrerit.</p>
+				<img class="project image right" src="projects_files/ycqVTBP.gif">
+				<p class="project description">Pellentesque cursus laoreet turpis. 
+Maecenas auctor ligula in libero aliquet accumsan a in augue. Nullam 
+vitae eleifend dui. Morbi aliquam eu risus et dapibus. Maecenas leo 
+urna, convallis quis ullamcorper a, elementum in tortor. Donec quis 
+tempus felis, id varius elit. Phasellus sodales eu leo id vulputate. 
+Etiam lectus urna, varius a consequat vel, interdum ut lectus. Quisque 
+turpis tortor, vestibulum ac sem sit amet, efficitur facilisis nisl. 
+Donec ac massa at tellus placerat tempor a sit amet nunc. Sed ultrices, 
+purus a vulputate tristique, ipsum nulla ultrices velit, vitae pretium 
+dui est eget enim. In aliquam tellus est, quis interdum nibh interdum 
+sit amet. Vestibulum iaculis libero velit, eget imperdiet nulla rutrum 
+at. Sed a porta nisi. Duis vel felis sit amet est ullamcorper 
+pellentesque. Sed cursus orci nec ex mollis cursus.</p>
+				<p class="project description">Nunc imperdiet neque id nunc molestie
+ consectetur. Donec sodales tortor nec quam pharetra eleifend. Curabitur
+ ex dui, pretium vitae semper id, gravida non lectus. Pellentesque nisi 
+magna, egestas sit amet pulvinar sed, posuere ac lectus. Nullam id 
+mattis metus. In sem est, fermentum id dolor a, ultricies volutpat dui. 
+Suspendisse potenti. Curabitur accumsan, orci vitae consectetur 
+ultrices, mi nulla dignissim urna, quis faucibus neque erat id nisi. 
+Morbi pulvinar tortor id nibh sodales, id egestas tortor efficitur. Sed 
+auctor, ex eu malesuada vestibulum, magna ipsum luctus orci, id 
+facilisis arcu purus vitae leo. Pellentesque habitant morbi tristique 
+senectus et netus et malesuada fames ac turpis egestas. Cras vulputate 
+nibh eget convallis tristique. Donec feugiat augue vel diam rutrum, eget
+ convallis orci lacinia.</p>
+				<a class="project source" href="https://github.com/JoshuaS3/auto-plow">Source code</a>
+			</div>
+			<div id="lognestmonster" class="project">
+				<h2 class="project title">LogNestMonster</h2>
+				<ul class="project tags">
+					<li>Data Structures</li>
+					<li>node.js</li>
+				</ul>
+				<p class="project description">Lorem ipsum dolor sit amet, 
+consectetur adipiscing elit. Morbi vitae varius leo. Sed sagittis 
+interdum massa vel malesuada. Vestibulum bibendum placerat nunc, at 
+convallis libero malesuada vitae. Mauris vel ex ligula. Sed erat magna, 
+vulputate sed porttitor sit amet, commodo accumsan risus. In sodales 
+rhoncus porttitor. Vivamus vel erat congue, convallis turpis et, 
+porttitor mi. Phasellus quis varius tortor. Nullam auctor justo eu nunc 
+tempus, nec venenatis diam dictum. Mauris a risus et eros placerat 
+tincidunt. Suspendisse eget nunc cursus, iaculis nisl faucibus, tempor 
+nunc. Nunc eu justo ornare, varius risus in, auctor leo. Aenean gravida 
+metus purus, sed euismod ante aliquet ut. Morbi eu arcu sem. Nulla eu 
+quam maximus, ultricies erat ut, tempor eros. Praesent id ante vitae 
+tellus auctor hendrerit.</p>
+				<p class="project description">Pellentesque cursus laoreet turpis. 
+Maecenas auctor ligula in libero aliquet accumsan a in augue. Nullam 
+vitae eleifend dui. Morbi aliquam eu risus et dapibus. Maecenas leo 
+urna, convallis quis ullamcorper a, elementum in tortor. Donec quis 
+tempus felis, id varius elit. Phasellus sodales eu leo id vulputate. 
+Etiam lectus urna, varius a consequat vel, interdum ut lectus. Quisque 
+turpis tortor, vestibulum ac sem sit amet, efficitur facilisis nisl. 
+Donec ac massa at tellus placerat tempor a sit amet nunc. Sed ultrices, 
+purus a vulputate tristique, ipsum nulla ultrices velit, vitae pretium 
+dui est eget enim. In aliquam tellus est, quis interdum nibh interdum 
+sit amet. Vestibulum iaculis libero velit, eget imperdiet nulla rutrum 
+at. Sed a porta nisi. Duis vel felis sit amet est ullamcorper 
+pellentesque. Sed cursus orci nec ex mollis cursus.</p>
+				<script src="https://gist.github.com/JoshuaS3/b6da364da80ffd70a4f2205e7dc56597.js"></script>
+				<p class="project description">Nunc imperdiet neque id nunc molestie
+ consectetur. Donec sodales tortor nec quam pharetra eleifend. Curabitur
+ ex dui, pretium vitae semper id, gravida non lectus. Pellentesque nisi 
+magna, egestas sit amet pulvinar sed, posuere ac lectus. Nullam id 
+mattis metus. In sem est, fermentum id dolor a, ultricies volutpat dui. 
+Suspendisse potenti. Curabitur accumsan, orci vitae consectetur 
+ultrices, mi nulla dignissim urna, quis faucibus neque erat id nisi. 
+Morbi pulvinar tortor id nibh sodales, id egestas tortor efficitur. Sed 
+auctor, ex eu malesuada vestibulum, magna ipsum luctus orci, id 
+facilisis arcu purus vitae leo. Pellentesque habitant morbi tristique 
+senectus et netus et malesuada fames ac turpis egestas. Cras vulputate 
+nibh eget convallis tristique. Donec feugiat augue vel diam rutrum, eget
+ convallis orci lacinia.</p>
+				<a class="project source" href="https://github.com/JoshuaS3/log-nest-monster">Source code</a>
+				<a class="project source" href="https://www.npmjs.com/package/lognestmonster">Published NPM package</a>
+			</div>
+			<div id="instant-gameworks-engine" class="project">
+				<h2 class="project title">Instant Gameworks Engine</h2>
+				<ul class="project tags">
+					<li>OpenGL</li>
+					<li>C#</li>
+					<li>C++</li>
+				</ul>
+				<img class="project image left" src="projects_files/MZZ4OIK.png">
+				<p class="project description">Lorem ipsum dolor sit amet, 
+consectetur adipiscing elit. Morbi vitae varius leo. Sed sagittis 
+interdum massa vel malesuada. Vestibulum bibendum placerat nunc, at 
+convallis libero malesuada vitae. Mauris vel ex ligula. Sed erat magna, 
+vulputate sed porttitor sit amet, commodo accumsan risus. In sodales 
+rhoncus porttitor. Vivamus vel erat congue, convallis turpis et, 
+porttitor mi. Phasellus quis varius tortor. Nullam auctor justo eu nunc 
+tempus, nec venenatis diam dictum. Mauris a risus et eros placerat 
+tincidunt. Suspendisse eget nunc cursus, iaculis nisl faucibus, tempor 
+nunc. Nunc eu justo ornare, varius risus in, auctor leo. Aenean gravida 
+metus purus, sed euismod ante aliquet ut. Morbi eu arcu sem. Nulla eu 
+quam maximus, ultricies erat ut, tempor eros. Praesent id ante vitae 
+tellus auctor hendrerit.</p>
+				<img class="project image right" src="projects_files/rzYYNs7.gif">
+				<p class="project description">Pellentesque cursus laoreet turpis. 
+Maecenas auctor ligula in libero aliquet accumsan a in augue. Nullam 
+vitae eleifend dui. Morbi aliquam eu risus et dapibus. Maecenas leo 
+urna, convallis quis ullamcorper a, elementum in tortor. Donec quis 
+tempus felis, id varius elit. Phasellus sodales eu leo id vulputate. 
+Etiam lectus urna, varius a consequat vel, interdum ut lectus. Quisque 
+turpis tortor, vestibulum ac sem sit amet, efficitur facilisis nisl. 
+Donec ac massa at tellus placerat tempor a sit amet nunc. Sed ultrices, 
+purus a vulputate tristique, ipsum nulla ultrices velit, vitae pretium 
+dui est eget enim. In aliquam tellus est, quis interdum nibh interdum 
+sit amet. Vestibulum iaculis libero velit, eget imperdiet nulla rutrum 
+at. Sed a porta nisi. Duis vel felis sit amet est ullamcorper 
+pellentesque. Sed cursus orci nec ex mollis cursus.</p>
+				<p class="project description">Nunc imperdiet neque id nunc molestie
+ consectetur. Donec sodales tortor nec quam pharetra eleifend. Curabitur
+ ex dui, pretium vitae semper id, gravida non lectus. Pellentesque nisi 
+magna, egestas sit amet pulvinar sed, posuere ac lectus. Nullam id 
+mattis metus. In sem est, fermentum id dolor a, ultricies volutpat dui. 
+Suspendisse potenti. Curabitur accumsan, orci vitae consectetur 
+ultrices, mi nulla dignissim urna, quis faucibus neque erat id nisi. 
+Morbi pulvinar tortor id nibh sodales, id egestas tortor efficitur. Sed 
+auctor, ex eu malesuada vestibulum, magna ipsum luctus orci, id 
+facilisis arcu purus vitae leo. Pellentesque habitant morbi tristique 
+senectus et netus et malesuada fames ac turpis egestas. Cras vulputate 
+nibh eget convallis tristique. Donec feugiat augue vel diam rutrum, eget
+ convallis orci lacinia.</p>
+				<a class="project source" href="https://github.com/JoshuaS3/instant-gameworks-csharp">Source code (C#)</a>
+				<a class="project source" href="https://github.com/JoshuaS3/instant-gameworks-engine">Source code (C++)</a>
+			</div>
+			<div id="profess" class="project">
+				<h2 class="project title">Profess</h2>
+				<ul class="project tags">
+					<li>Internet Protocol</li>
+					<li>node.js</li>
+					<li>Python</li>
+					<li>Lua</li>
+					<li>Java</li>
+				</ul>
+				<p class="project description">Lorem ipsum dolor sit amet, 
+consectetur adipiscing elit. Morbi vitae varius leo. Sed sagittis 
+interdum massa vel malesuada. Vestibulum bibendum placerat nunc, at 
+convallis libero malesuada vitae. Mauris vel ex ligula. Sed erat magna, 
+vulputate sed porttitor sit amet, commodo accumsan risus. In sodales 
+rhoncus porttitor. Vivamus vel erat congue, convallis turpis et, 
+porttitor mi. Phasellus quis varius tortor. Nullam auctor justo eu nunc 
+tempus, nec venenatis diam dictum. Mauris a risus et eros placerat 
+tincidunt. Suspendisse eget nunc cursus, iaculis nisl faucibus, tempor 
+nunc. Nunc eu justo ornare, varius risus in, auctor leo. Aenean gravida 
+metus purus, sed euismod ante aliquet ut. Morbi eu arcu sem. Nulla eu 
+quam maximus, ultricies erat ut, tempor eros. Praesent id ante vitae 
+tellus auctor hendrerit.</p>
+				<script src="https://gist.github.com/JoshuaS3/34977639bfbe0ac34911f299830f64ed.js"></script>
+				<a class="project source" href="https://github.com/JoshuaS3/profess">Source code (all)</a>
+			</div>
+			<hr>
+			<ul class="horizontal" style="width: 100%">
+				<li><a href="/">Home</a></li>
+				<li><a href="/blog">Blog</a></li>
+				<li><a href="/contact">Contact</a></li>
+			</ul>
+			<p>Copyright (c) 2019 Joshua Stockin. All rights reserved.</p>
+		</div>
+	
+</body></html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Josh Stockin - Blog</title>
+		<style>
+			${STYLE}
+			img.banner {
+				width: 100%;
+				height: 25em;
+				object-fit: cover;
+				object-position: center;
+			}
+			img.fit {
+				display: block;
+				max-width: 850px;
+				width: all;
+				max-height: 40em;
+				height: auto;
+				margin: 10px auto;
+			}
+			@media only screen and (max-width: 850px) {
+				img.fit {
+					max-width: 100%;
+				}
+			}
+			div.section, #comments {
+				margin: 0 auto;
+				padding: 40px;
+				max-width: 650px;
+				overflow: auto;
+			}
+			div.section img {
+				display: block;
+				width: auto;
+				margin: 10px 0;
+				max-width: 100%;
+				max-height: 450px;
+			}
+			div.section img.left {
+				float: left;
+				margin-right: 20px;
+			}
+			div.section img.right {
+				float: right;
+				margin-left: 20px;
+			}
+			div.header .title {
+				margin-bottom: 0;
+			}
+			div.header p {
+				font-size: 1.2em;
+				margin: 0;
+			}
+			ul.header.tags {
+				font-size: 1.2em;
+			}
+			ul.header.tags::before {
+				content: "Tags: ";
+			}
+			ul.header.tags li {
+				margin-right: 0;
+			}
+			ul.header.tags li:not(:last-child)::after {
+				content: ", ";
+			}
+			div.section {
+				font-size: 1.1em;
+			}
+
+			#comments {
+				margin-bottom: 20em;
+			}
+			.comment {
+				margin: 20px 0;
+				overflow: auto;
+			}
+			.comment .meta p {
+				font-size: 1.1em;
+				margin: 0;
+			}
+			.comment .meta .author {
+				font-weight: bolder;
+			}
+			.comment .content {
+				margin-top: 10px;
+				font-size: 1em;
+			}
+		</style>
+	</head>
+	<body>
+		<img class="banner" src="https://i.imgur.com/usMtR75.png" />
+		<div class="section">
+			<div class="header">
+				<h1 class="title">Making a RC Snow Plow</h1>
+				<p class="author">by Josh 'joshuas3' Stockin</p>
+				<p class="date">on July 26, 2019</p>
+				<br>
+				<a href="/">Back to blog</a>
+				<hr>
+			</div>
+			<p>Ea repellat repellendus ullam ducimus eos in. Nam velit ipsa odit hic sit harum. Qui excepturi maiores sit et sunt. Ut velit assumenda quisquam vel optio iste sed. Voluptatem placeat dolore nesciunt eos et a expedita. Est eum porro aut.</p>
+			<img class="right" src="https://i.imgur.com/5yTQmYl.png"/>
+			<p>Non totam ratione esse aut et. Repudiandae earum ipsam laborum fuga dolorem. Et ex earum vitae ut incidunt. Et sequi eum numquam. Nihil tempore pariatur facere ut harum sed minima aut.</p>
+			<p>Mollitia sit itaque voluptatem quos quos qui. Itaque aut consequatur consequuntur porro nihil. Quidem recusandae provident autem. Atque aspernatur deserunt amet voluptatem cum excepturi. Totam soluta autem voluptas corrupti labore. Et voluptate enim quia maxime voluptatem voluptates.</p>
+			<p>Provident et id ipsa qui veniam corporis. Nemo occaecati quod et quo explicabo voluptate sed. Corporis neque cumque qui. Voluptatem fugiat porro quaerat rerum voluptate. Non qui sit nesciunt sit. Debitis saepe est expedita sapiente.</p>
+		</div>
+		<img class="fit" src="https://i.imgur.com/usMtR75.png"/>
+		<div class="section">
+			<img class="left" src="https://i.imgur.com/ycqVTBP.gif"/>
+			<p>Quidem mollitia sapiente est. Dolores nihil facilis voluptate saepe sit temporibus odio. Illum fugit voluptates repudiandae non rerum laudantium. Voluptatem est quas perferendis. Quas saepe corrupti vero.</p>
+			<p>Eveniet dolorum iste repudiandae dolorem. Aut non voluptas repellendus animi sapiente voluptatem eaque et. Pariatur asperiores tempore sed in in. Numquam maxime quaerat quaerat expedita sit ratione consequatur. Harum non qui vero.</p>
+			<p>Adipisci est nostrum sit distinctio amet rerum. Ad dolore est qui perferendis perspiciatis a in. Quaerat assumenda distinctio autem optio accusamus et sit ullam.</p>
+			<script src="https://gist.github.com/JoshuaS3/0e3ced9d014ea43ab1951aac8c1ffb72.js"></script>
+			<p>Dolorem illo est atque in at assumenda. Distinctio necessitatibus unde ducimus quos expedita ut suscipit. Rerum consequatur aliquam vitae. Cum minima ut consectetur deserunt.</p>
+		</div>
+		<img class="fit" src="https://i.imgur.com/FCnqtDL.png"/>
+		<div class="section">
+			<p>Est omnis voluptatibus omnis in placeat quia. Quas ut necessitatibus nam dolore harum. Voluptates ut rerum voluptatum nihil iusto. Ex magni hic occaecati qui quia voluptatem. Voluptatibus alias vel laudantium officia voluptatibus. Cum dolore enim voluptas.</p>
+			<p>Aspernatur impedit eaque amet expedita. Omnis odio nemo alias deleniti. Excepturi quia iusto eum ea occaecati.</p>
+		</div>
+		<div id="comments">
+			<div class="header">
+				<h1 class="header title">Comments</h1>
+				<h3>Compose</h3>
+				<form action="/blog" method="post">
+					<span>Email Address</span>
+					<br>
+					<input type="email" required />
+					<br>
+					<span>Content</span>
+					<textarea style="font-size: 1.1em; width: 100%; height: 200px; resize: none; box-sizing: border-box; padding: 5px; border: 1px solid #ccc; border-radius: 5px" required></textarea>
+					<script src='https://www.google.com/recaptcha/api.js'></script>
+					<div class="g-recaptcha" id="rcaptcha"  data-sitekey="6Ldj03cUAAAAADT-7ddrKDUKAX9DSeC8vCSv4gdp"></div>
+					<input type="submit" value="Submit" />
+				</form>
+				<hr>
+			</div>
+			<div>
+				<div class="comment">
+					<div class="meta">
+						<p class="author">joshuas3</p>
+						<p class="date">on July 27, 2019</p>
+					</div>
+					<div class="content">
+						<p>Est omnis voluptatibus omnis in placeat quia. Quas ut necessitatibus nam dolore harum. Voluptates ut rerum voluptatum nihil iusto. Ex magni hic occaecati qui quia voluptatem. Voluptatibus alias vel laudantium officia voluptatibus. Cum dolore enim voluptas.</p>
+						<hr>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

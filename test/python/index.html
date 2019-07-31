@@ -1,0 +1,98 @@
+<!DOCTYPE HTML>
+<html>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<head>
+		<title>Josh Stockin</title>
+		<style>
+			body {
+				background-color: #333;
+				padding: 0;
+				margin: 0;
+				color: #eee;
+				font: 1.2em/1.6;
+				font-family: Segoe UI, Helvetica Neue, sans-serif;
+				user-select: none;
+			}
+			#background {
+				position: fixed;
+				z-index: -1;
+				width: 100%;
+				height: 100%;
+				background-image: linear-gradient(rgba(0,0,0,0.45),rgba(0,0,0,0.45)), url(https://i.imgur.com/83Si9AW.jpg);
+				background-size: cover;
+				background-position: center;
+			}
+			#wrapper {
+				position: absolute;
+				width: 100%;
+				min-height: 100%;
+			}
+			#heading {
+				padding: 12vw 5vw;
+				margin: 0 auto;
+			}
+			#heading > h1 {
+				font-size: 5em;
+				margin: 0;
+			}
+			#heading > h2 {
+				font-size: 2em;
+				font-weight: lighter;
+			}
+			#heading > ul {
+				list-style: none;
+				padding: 0;
+				margin: 0;
+			}
+			#heading > #languages > li {
+				font-size: 1.2em;
+				display: inline-block;
+				font-weight: bold;
+				margin: 0.5em;
+				min-width: 3em;
+				padding: 8px;
+				border-bottom: 3px solid #eee;
+				transition: border-bottom-width 0.2s, margin-bottom 0.2s;
+			}
+			#heading > #languages > li:hover {
+				border-bottom-width: 6px;
+				margin-bottom: 0;
+			}
+			#heading > #menu li {
+				font-size: 3em;
+				font-weight: bolder;
+				display: inline-block;
+				padding:10px;
+				margin: 1.5em;
+				margin-bottom: 0;
+			}
+			a {
+				color: #eee;
+				text-decoration: none;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="background" ></div>
+		<div id="wrapper">
+			<center id="heading">
+				<h1>Josh Stockin</h1>
+				<h2>A 15-year-old computer programmer and aspiring software developer.</h2>
+				<ul id="languages">
+				<li style="background-color:#44883e">node.js</li>
+					<li style="background-color:#4584b6">Python</li>
+					<li style="background-color:#cd669a">HTML, CSS, JavaScript</li>
+					<li style="background-color:#004482">C++</li>
+					<li style="background-color:#000080">Lua</li>
+					<li style="background-color:#68217a">C#</li>
+				</ul>
+				<ul id="menu">
+					<a href="projects"><li>Projects</li></a>
+					<a href="blog"><li>Blog</li></a>
+					<a href="contact"><li>Contact</li></a>
+				</ul>
+			</center>
+		</div>
+	</body>
+</html>

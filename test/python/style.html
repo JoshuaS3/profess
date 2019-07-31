@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Josh Stockin - Stylesheet</title>
+		<style>
+			:root {
+				--accent-color: #6ca7c9;
+			}
+			body {
+				padding: 0;
+				margin: 0;
+				font-family: Segoe UI, Helvetica Neue, sans-serif;
+			}
+			* {
+				color: #454545;
+				line-height: 1.4;
+			}
+			a {
+				font-weight: bolder;
+				color: var(--accent-color);
+			}
+			ul {
+				display: block;
+			}
+			ul.unstyled, ol.unstyled {
+				padding: 0;
+				list-style: none;
+			}
+			ul.horizontal li, ol.horizontal li {
+				display: inline;
+				margin-right: 10px;
+			}
+			hr {
+				border: none;
+				border-top: 1px solid #ccc
+			}
+			body {
+				max-width: 600px;
+				margin: 0 auto;
+				padding: 20px;
+			}
+		</style>
+	</head>
+	<body>
+		<button id="boundingBoxes">Enable bounding boxes</button>
+		<script type="application/javascript">
+			let boundingBoxStyle = `
+				* {
+					outline: 1px dashed red !important;
+				}
+				*:hover {
+					outline: 1px solid red !important;
+				}
+			`
+			let style = document.createElement("style");
+			style.type = "text/css";
+			style.innerText = "";
+			document.head.appendChild(style);
+
+			let active = false;
+
+			let button = document.getElementById("boundingBoxes");
+			button.onclick = function() {
+				active = !active;
+				if (active) {
+					style.innerText = boundingBoxStyle;
+				} else {
+					style.innerText = "";
+				}
+			}
+		</script>
+
+		<hr>
+
+		<h1>header 1</h1>
+		<h2>header 2</h2>
+		<h3>header 3</h3>
+		<h4>header 4</h4>
+		<h5>header 5</h5>
+		<h6>header 6</h6>
+		
+		<hr>
+		
+		<a href="/">URL</a>
+		<span> | </span>
+		<a>empty URL</a>
+
+		<hr>
+
+		<ul>
+			<li>unorganized list item 1</li>
+			<li>unorganized list item 2</li>
+		</ul>
+		<ul style="horizontal">
+			<p>ul.horizontal</p>
+			<li>unorganized list item 1</li>
+			<li>unorganized list item 2</li>
+		</ul>
+		<ol>
+			<li>organized list item 1</li>
+			<li>organized list item 2</li>
+		</ol>
+	</body>
+</html>
