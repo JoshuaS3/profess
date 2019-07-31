@@ -177,7 +177,7 @@ class Site:
 
 		RequestHandler.siteObj = self
 
-		self.__server = ThreadingHTTPServer(('localhost', self._config.Port), RequestHandler)
+		self.__server = ThreadingHTTPServer(('0.0.0.0', self._config.Port), RequestHandler)
 
 		if self._config.SSLEnabled:
 			import ssl
