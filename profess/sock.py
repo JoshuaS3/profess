@@ -19,20 +19,19 @@
 
 import socket
 
-setting_family = socket.AF_INET
-setting_tcp = socket.SOCK_STREAM
-
-setting_socket_level = socket.SOL_SOCKET
-setting_tcp_level = socket.IPPROTO_TCP
-
-setting_reuse_addr = socket.SO_REUSEADDR
-setting_tcp_nodelay = socket.TCP_NODELAY
-
-max_conn = socket.SOMAXCONN
-
-def sock(address_tuple):
-	new_sock = socket.socket(setting_family, setting_tcp, 0)
-	new_sock.setsockopt(setting_socket_level, setting_reuse_addr, 1)
-	new_sock.setsockopt(setting_tcp_level, setting_tcp_nodelay, 1)
-	new_sock.bind(address_tuple)
-	return new_sock
+class sock():
+	family = socket.AF_INET
+	def __init__(self):
+		self.sock = socket.socket(self.family, socket.SOCK_STREAM, 0)
+	def reuse_addr(self, toggle):
+		self.sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, toggle and 1 or 0)
+	def tcp_nodelay(self, toggle):
+		self.sock.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, toggle and 1 or 0)
+	def bind(self, address_tuple):
+		self.sock.bind(address_tuple)
+	def listen(self):
+		self.sock.listen(socket.SOMAXCONN)
+	def accept(self):
+		return self.sock.accept()
+	def close(self):
+		self.sock.close()

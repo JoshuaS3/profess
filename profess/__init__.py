@@ -17,6 +17,6 @@
 # You should have received a copy of the GNU General Public License
 # along with Profess. If not, see <https://www.gnu.org/licenses/>.
 
-from .sock import sock, max_conn
+from .sock import sock
 from .semantics import *
 from .server import *

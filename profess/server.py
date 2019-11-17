@@ -17,21 +17,37 @@
 # You should have received a copy of the GNU General Public License
 # along with Profess. If not, see <https://www.gnu.org/licenses/>.
 
-from .sock import sock, max_conn
+from .sock import sock
 from .semantics import *
 
 class server:
 	def __init__(self):
-		self.sock = sock(("0.0.0.0", 8080))
-		self.sock.listen(max_conn)
+		self.sock = sock()
+		self.sock.reuse_addr(True)
+		self.sock.tcp_nodelay(True)
+		self.sock.bind(("0.0.0.0", 8080))
+		self.sock.listen()
 		while True:
 			connection, address = self.sock.accept()
+			print("Received connection")
+
+			request_str = connection.recv(4096).decode("latin-1")
+			for line in request_str.split("\r\n"):
+				print("< " + line)
+
 			status = get_status_reason(200)
-			content = "<html><body><h1>tesaaaaaat</h1></body></html>"
+			content = "<html><body><center><h1>hello world</h1></center></body></html>"
 			headers = [("content-length", len(content)), ("content-type", "text/html"), ("server", "profess/0.1.0")]
 
-			status_str = status_line(http20, status)
+			status_str = status_line(http11, status)
 			headers_str = format_headers(headers)
-			connection.sendall(full_response(status_str, headers_str, content).encode("utf-8"))
+			response_str = full_response(status_str, headers_str, content)
+			connection.sendall(response_str.encode("latin-1"))
+			for line in response_str.split("\r\n"):
+				print("> " + line)
+
 			connection.close()
-			print("> " + status_str)
+			print("Closing connection")
+			print()
+	def close():
+		self.sock.close()
